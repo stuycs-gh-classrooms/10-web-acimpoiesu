@@ -1,7 +1,7 @@
 nav {
 }
-page {
-  
+.page {
+  background-color: red;
 }
 li {
   display : inline;
