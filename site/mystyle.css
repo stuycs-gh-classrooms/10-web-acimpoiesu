@@ -52,7 +52,7 @@ nav a:hover {
 body {
     font-family: Arial, sans-serif;
     padding: 20px;
-    font-size: auto;
+    font-size: 22px;
     width: 67%;
     margin: auto;
     margin-top: 30px;
@@ -163,4 +163,8 @@ a:hover {
   float: right;
   margin: 0;
   padding: 0;
+}
+
+.imgpg1 {
+  height: 22em;
 }
