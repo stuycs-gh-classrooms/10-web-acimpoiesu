@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fractal Art Gallery</title>
+    <link href="fractals.css" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <h1>Fractal Art Gallery</h1>
+    </header>
+    <div class="container">
+        <section class="section">
+            <h2>Koch Curve</h2>
+            <p> This is the base Koch Curve <code>original_koch_curve(t, 5, 20)</code> </p>
+            <div class="image">
+                <img src="basekochcurve.png">
+            </div>
+            <p> My modifications:</p>
+            <ul>
+    <li>Lefts changed from 60 to 30</li>
+    <li>Pen Color Changed to Red</li>
+    <li>Two Koch Curves are drawn with a Right turn of 120 in between</li>
+          </ul>
+          <p> This is my new modified Koch Curve <pre><code>
+    koch_curve(t ,5, 20)
+    t.rt(120)
+    koch_curve(t ,5, 20)
+        </code> </pre>
+        <code>
+          <div class="image">
+              <img src="newkochcurve.png">
+          </div>
+            <pre>
+  def koch_curve(t, depth, size):
+    if (depth == 1):
+        t.pencolor("red")
+        t.fd(size)
+    else:
+        koch_curve(t, depth-1, size)
+        t.lt(30)
+        koch_curve(t, depth-1, size)
+        t.rt(120)
+        koch_curve(t, depth-1, size)
+        t.lt(30)
+        koch_curve(t, depth-1, size)
+</code>
+            </pre>
+        </section>
+
+        <section class="section">
+            <h2>Sierpinski Triangle</h2>
+            <p> This is the base Sierpinski Triangle <code>original_sierpinski(t, 5, 150</code> </p>
+            <div class="image">
+                <img src="basesierpinski.png">
+            </div>
+            <p> My modifications:</p>
+            <ul>
+              <li>Triangles replaced with squares and squares are not connected</li>
+              <li>Chooses a random color from a list to make pen color for each square</li>
+           </ul>
+           <p>This is my new modified Sierpinski Triangle<code> sierpinski(t, 5, 150)</code></p>
+           <div class="image">
+    <img src="newsierpinski.png">
+</div>
+            <pre>
+                <code>
+  def get_color():
+    i = ["red", "blue", "green", "purple", "brown", "orange"]
+    a = random.randrange(6)
+    return i[a]
+def square(t, size):
+    t.pencolor(get_color())
+    t.pd()
+    t.lt(90)
+    t.fd(size)
+    t.rt(90)
+    t.fd(size)
+    t.rt(90)
+    t.fd(size)
+    t.rt(90)
+    t.fd(size)
+    t.rt(180)
+    t.pu()
+
+def sierpinski(t, depth, size):
+    if depth == 1:
+        square(t, size)
+    else:
+        sierpinski(t, depth-1, size/2)
+        t.fd(size)
+        sierpinski(t, depth-1, size/2)
+        t.bk(size)
+        t.lt(60)
+        t.fd(size)
+        t.rt(60)
+        sierpinski(t, depth-1, size/2)
+        t.rt(120)
+        t.fd(size)
+        t.lt(120)</code>
+            </pre>
+        </section>
+
+        <section class="section">
+            <h2>Cherry Blossom Tree</h2>
+              <p> This is the base Tree <code>original_tree(raphael, 5, 60,15)</code> </p>
+            <div class="image">
+                <img src="tree.png">
+            </div>
+            <p> My modifications:</p>
+            <ul>
+    <li>Cherry blossoms are added to the base case and appear at the end of the tree</li>
+    <li>Size and angle randomly changed within a range</li>
+    <li>Tree made brown and blossoms pink</li>
+    <li>Tree size and width decrease for each of the subtrees</li>
+            </ul>
+            <p>This is my new modified Tree<pre><code>raphael.lt(90)
+ cherry_blossom_tree(raphael, 6, 200, 30, 5)</code></pre></p>
+            <div class="image">
+                <img src="newtree.png">
+            </div>
+            <pre>
+<code>
+  def cherry_blossom_tree(t, depth, size, angle, width):
+    if depth == 0:
+        t.pencolor("pink")
+        t.fillcolor("pink")
+        t.begin_fill()
+        t.circle(10)
+        t.end_fill()
+        t.pencolor("brown")
+    else:
+        t.width(width)
+        size += random.randrange(-6, 7)
+        angle += random.randrange(-2,3)
+        t.pencolor("brown")
+        t.fd(size)
+        t.rt(angle)
+        cherry_blossom_tree(t, depth-1, size * 0.65, angle, width-1)
+        t.lt(2 * angle)
+        cherry_blossom_tree(t, depth-1, size * 0.65, angle, width-1)
+        t.rt(angle)
+        t.bk(size)</code>
+            </pre>
+        </section>
+    </div>
+</body>
+</html>
